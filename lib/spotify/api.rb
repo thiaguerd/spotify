@@ -4,6 +4,7 @@ module Spotify
       url = Rails.configuration.spotify[:login]
       url.gsub!('client_id?', Rails.configuration.spotify[:client_id])
       url.gsub!('redirect_uri?', redirect_uri(request: request))
+      url
     end
 
     class << self
