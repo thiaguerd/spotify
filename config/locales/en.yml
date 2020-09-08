@@ -30,7 +30,7 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: Hello world
+  app_name: Spotify Manager
   tests_in_production: Running tests in production model? WTF?
   session:
     in: In

@@ -1,0 +1,40 @@
+nav.navbar aria-label='main navigation' role='navigation'
+  .navbar-brand
+    a.navbar-item href='#{root_path}'
+      = image_tag 'logo'
+      span.app_name = t('app_name')
+    a.navbar-burger.burger aria-expanded='false' aria-label='menu' data-target='navbarBasicExample' role='button'
+      span aria-hidden='true'
+      span aria-hidden='true'
+      span aria-hidden='true'
+  #navbarBasicExample.navbar-menu
+    .navbar-end
+      .navbar-item
+        .buttons
+          a.button.is-primary href='#{url_in}'
+            strong = t('session.in')
+          a.button.is-light href='#{session_out_path}' = t('session.out')
+
+javascript:
+
+  function burger(){
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+    if ($navbarBurgers.length > 0) {
+      $navbarBurgers.forEach( el => {
+        el.addEventListener('click', () => {
+          const target = el.dataset.target;
+          const $target = document.getElementById(target);
+          el.classList.toggle('is-active');
+          $target.classList.toggle('is-active');
+        });
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', burger());
+
+sass:
+  .navbar-brand
+    a
+      .app_name
+        margin: 10px
