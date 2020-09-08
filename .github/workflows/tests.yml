@@ -41,6 +41,8 @@ jobs:
         RAILS_ENV: test
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         CI: ${{ secrets.CI }}
+        spotify_client_id: ${{ secrets.spotify_client_id }}
+        spotify_secret: ${{ secrets.spotify_secret }}
       run: |
         source /home/runner/.rvm/scripts/rvm
         export NVM_DIR="/home/runner/.nvm"
