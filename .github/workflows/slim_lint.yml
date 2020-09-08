@@ -1,4 +1,4 @@
-name: Ruby Code Analyzer
+name: Slim Code Analyzer
 on: [push]
 jobs:
   build:
@@ -23,4 +23,4 @@ jobs:
         source /home/runner/.rvm/scripts/rvm
         rvm use 2.7.1
         bundle install --jobs 4 --retry 3
-        bundle exec rubocop --parallel
+        slim-lint app/**/*.slim
