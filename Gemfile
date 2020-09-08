@@ -16,6 +16,8 @@ gem 'rubocop-rails', require: false
 gem 'rubocop-rake', require: false
 gem 'rubocop-rspec', require: false
 gem 'sass-rails', '>= 6'
+gem 'slim'
+gem 'slim_lint', require: false
 gem 'sqlite3', '~> 1.4'
 gem 'turbolinks', '~> 5'
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
