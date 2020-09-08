@@ -9,9 +9,9 @@ RSpec.describe 'Sessions', type: :request do
   end
 
   describe 'GET /out' do
-    it 'returns http success' do
+    it 'returns http redirect to root_path' do
       get '/session/out'
-      expect(response).to have_http_status(:success)
+      expect(response).to redirect_to(root_path)
     end
   end
 end
