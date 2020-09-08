@@ -24,10 +24,10 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker', '~> 4.0'
 
 group :development do
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'codecov'
   gem 'factory_bot_rails'
   gem 'listen', '~> 3.2'
+  gem 'pry'
   gem 'rspec-rails'
   gem 'simplecov'
   gem 'spring'
