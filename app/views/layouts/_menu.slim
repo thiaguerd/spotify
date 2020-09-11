@@ -11,9 +11,11 @@ nav.navbar aria-label='main navigation' role='navigation'
     .navbar-end
       .navbar-item
         .buttons
-          a.button.is-primary href='#{url_in}'
-            strong = t('session.in')
-          a.button.is-light href='#{session_out_path}' = t('session.out')
+          - if current_user
+            a.button.is-light href='#{out_path}' = t('session.out')
+          - else
+            a.button.is-primary href='#{url_in}'
+              strong = t('session.in')
 
 javascript:
 
