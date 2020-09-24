@@ -1,0 +1,30 @@
+require: 
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-i18n
+  - rubocop-rspec
+  - rubocop-rake
+  - rubocop-md
+AllCops:
+  NewCops: enable
+  Exclude:
+    - bin/*
+    - node_modules/**/*
+    - db/seeds.rb
+    - db/schema.rb
+    - db/migrate/*
+    - commands.md
+Layout/LineLength:
+  Max: 120
+  Exclude:
+    - Rakefile
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*.rb
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+RSpec/AnyInstance:
+  Exclude:
+    - spec/requests/talents_spec.rb

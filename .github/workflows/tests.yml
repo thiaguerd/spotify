@@ -1,0 +1,59 @@
+name: Rspec
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:10.8
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      redis:
+        image: redis
+        ports:
+        - 6379:6379
+        options: --entrypoint redis-server
+    steps:
+    - uses: actions/checkout@v2
+    - name: Install Node.js 12.14.0
+      run: |
+        sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
+        export NVM_DIR="/home/runner/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        nvm install 12.14.0
+    - name: Install Ruby 2.7.1
+      run: |
+        sudo apt-get install curl gpg
+        sudo curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+        sudo curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+        sudo curl -sSL https://get.rvm.io | bash -s stable
+        source /home/runner/.rvm/scripts/rvm
+        rvm install 2.7.1
+    - name: Build and test with Rake
+      env:
+        RUBYOPT: '-W:no-deprecated -W:no-experimental'
+        PGHOST: 127.0.0.1
+        PGUSER: postgres
+        RAILS_ENV: test
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        CI: ${{ secrets.CI }}
+        spotify_client_id: ${{ secrets.spotify_client_id }}
+        spotify_secret: ${{ secrets.spotify_secret }}
+      run: |
+        source /home/runner/.rvm/scripts/rvm
+        export NVM_DIR="/home/runner/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        rvm use 2.7.1
+        nvm use 12.14.0
+        echo "node -v $(node -v)"
+        sudo apt-get -yqq install libpq-dev
+        gem install bundler
+        bundle install --jobs 4 --retry 3
+        bundle exec rails db:create
+        bundle exec rails db:migrate
+        yarn install --check-files
+        bundle exec rspec

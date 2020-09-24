@@ -1,0 +1,26 @@
+name: Slim Code Analyzer
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install Ruby 2.7.1
+      run: |
+        sudo apt-get install curl gpg
+        sudo curl -sSL https://rvm.io/mpapis.asc | gpg --import -
+        sudo curl -sSL https://rvm.io/pkuczynski.asc | gpg --import -
+        sudo curl -sSL https://get.rvm.io | bash -s stable
+        source /home/runner/.rvm/scripts/rvm
+        rvm install 2.7.1
+    - name: Install required package
+      run: |
+        sudo apt-get -yqq install libpq-dev
+    - name: Running tests
+      env:
+        RUBYOPT: '-W:no-deprecated -W:no-experimental'
+      run: |
+        source /home/runner/.rvm/scripts/rvm
+        rvm use 2.7.1
+        bundle install --jobs 4 --retry 3
+        slim-lint app/**/*.slim

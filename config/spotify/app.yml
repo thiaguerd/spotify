@@ -1,0 +1,18 @@
+spotify: &spotify
+  app:
+    client_id: <%= ENV['spotify_client_id'] %>
+    secret: <%= ENV['spotify_secret'] %>
+    url:
+      callback: /callback
+      login: https://accounts.spotify.com/authorize?client_id=client_id?&redirect_uri=redirect_uri?&response_type=code&scope=user-read-email user-read-private playlist-read-private user-library-read user-library-modify user-top-read playlist-read-collaborative playlist-modify-public playlist-modify-private user-follow-read user-follow-modify user-read-playback-state user-read-currently-playing user-modify-playback-state user-read-recently-played
+      me: https://api.spotify.com/v1/me
+      token_uri: https://accounts.spotify.com/api/token
+
+test:
+  <<: *spotify
+
+development:
+  <<: *spotify
+
+production:
+  <<: *spotify
