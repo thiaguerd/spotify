@@ -24,6 +24,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'webpacker', '~> 4.0'
 
 group :development do
+  gem 'brakeman'
   gem 'codecov'
   gem 'factory_bot_rails'
   gem 'listen', '~> 3.2'
