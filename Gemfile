@@ -5,6 +5,7 @@ ruby '2.7.1'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'draper'
+gem 'factory_bot_rails'
 gem 'jbuilder', '~> 2.7'
 gem 'puma', '~> 4.1'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
@@ -26,7 +27,6 @@ gem 'webpacker', '~> 4.0'
 group :development do
   gem 'brakeman'
   gem 'codecov'
-  gem 'factory_bot_rails'
   gem 'listen', '~> 3.2'
   gem 'pry'
   gem 'rspec-rails'
